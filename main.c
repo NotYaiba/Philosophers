@@ -3,73 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/07/10 19:55:30 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/07/12 22:38:06 by yaiba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void ft_putstr(char *str, int fd)
+int	logError(char *err, int ret)
 {
-    int i;
+	ft_putstr(err, 2);
+	return (ret);
+}
 
+void	*routine(void *tmp)
+{
+	t_philo *philo;
+	philo = tmp;
+	
+	printf("%d entering\n", philo->id);
+}
+
+
+void	start_sum(t_data *data, t_philo **philo)
+{
+	int i;
 	i = 0;
-	while (str[i])
+	printf("%d\n", data->num_philos);
+	// return ;
+	while (i < data->num_philos)
 	{
-		write(fd, &str[i], 1);
+		philo[i] = malloc(sizeof(t_philo));
+		philo[i]->id = i;
+		pthread_create(&data->allphilo[i], NULL, (void *)routine, philo[i]);
 		i++;
 	}
+
 }
 
-void    *routine(void *i)
-{
-    int a = *((int *) i);
-	t_philo *philos = (t_philo *)i;
-    
-    printf("%d is eating\n", philos->idd);                                                                                                                                                                                                            
-	ft_putstr("hello\n", 1);
-     printf("%d is done eating \n", a);
-    return (NULL);
-}
 int main(int ac, char **av)
 {
-    pthread_t *th;
-    pthread_mutex_t *fork;
-    t_philo *philos;
     t_data *data;
+	t_philo	**philo;
 
-    philos = malloc(sizeof(t_philo));
-    data = malloc(sizeof(t_data));
-    int i;
-    int d = 5;
-    th = malloc(sizeof(pthread_t) * d);
-    philos->fork= malloc(sizeof(pthread_mutex_t) * d);
-    philos->id= malloc(sizeof(pthread_mutex_t) * d);
-    i = 0;
-    while (i < d)
-    {
-        pthread_mutex_init(&philos->fork[i],NULL);
-        philos->id[i] = i + 1;
-        i++;
-    }
-    i = 0;
-    while (i < d)
-    {
-        pthread_create(&th[i], NULL, &routine, philos);
-        i++;
-    }
-    i = 0;
-        
-    while (1);
-    i = 0;
-    while (i < d)
-    {
-        pthread_mutex_destroy(&philos->fork[i]);
-        i++;
-    }
+	if (ac < 5 || ac > 6 || check_args(av) == 0)
+		return (logError("Error.\n", 0));
+	philo = malloc(sizeof(t_philo*) * data->num_philos);
+	data = malloc(sizeof(t_data));
+	data->allphilo = malloc(sizeof(pthread_t) * data->num_philos);
+	
+	init_data(data, av, ac);
+	start_sum(data, philo);
+	while (1);
     return (0);
 }
 

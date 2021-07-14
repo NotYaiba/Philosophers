@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:28:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/07/10 19:30:02 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/07/12 22:54:44 by yaiba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@
 
 typedef struct s_philo
 {
-    int *id;
-       pthread_mutex_t *fork;
+    int id;
 }				t_philo;
 typedef struct s_data
 {
-    t_philo     *allphilos;
- 
-    
+    int num_philos;
+    int time_todie;
+    int time_toeat;
+    int time_tosleep;
+    int meals_num;
+    pthread_t *allphilo;
+    pthread_mutex_t	*forks; 
 }				t_data;
+
+void ft_putstr(char *str, int fd);
+int		ft_isdigit(int cc);
+int ft_atoi(const char *s);
+void init_data(t_data *data, char **av, int ac);
+int	check_args(char **av);
+
 #endif
