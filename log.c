@@ -1,7 +1,9 @@
 #include "philosophers.h"
 
-void print(char *msg, t_philo *philo , int time, int a)
+void print(char *msg, t_philo *philo , int time, int a, t_data *data)
 {
+	if (a != 3)
+		pthread_mutex_lock(&data->lock);
     if (a == 2)
     {
         write(2 , msg, strlen(msg)); //todo
@@ -14,9 +16,9 @@ void print(char *msg, t_philo *philo , int time, int a)
         ft_putnbr_fd(philo->id, 1);
 		ft_putchar_fd(' ', 1);
 		write(1 , msg, strlen(msg)); //todo
+
 	}
-
-
+	pthread_mutex_unlock(&data->lock);
 }
 void	ft_putchar_fd(char c, int i)
 {

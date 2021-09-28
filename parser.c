@@ -7,6 +7,8 @@ void init_data(t_data *data, char **av, int ac)
     data->time_toeat = ft_atoi(av[3]);
     data->time_tosleep = ft_atoi(av[4]);
     data->meals = 0;
+    data->philo_id = 0;
+
     if(ac == 6)
         data->meals = ft_atoi(av[5]);
 }

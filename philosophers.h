@@ -6,7 +6,7 @@
 /*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:28:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/09/27 02:11:10 by yaiba            ###   ########.fr       */
+/*   Updated: 2021/09/27 22:44:13 by yaiba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	add_frontf(t_fork **alst, t_fork *new);
 void	addbackf(t_fork **alst, t_fork *new);
 
 //log
-void print(char *msg, t_philo *philo , int time, int a);
+void print(char *msg, t_philo *philo , int time, int a, t_data *data);
 void			ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int i);
 // utils
