@@ -36,29 +36,29 @@ int	check_args(char **av)
 
 void log_data(t_data *data)
 {
-	printf("all philos : %d\n", data->num_philos);
-	printf("time to die : %d\n", data->time_todie);
-	printf("time to eat : %d\n", data->time_toeat);
-	printf("time_tosleep : %d\n", data->time_tosleep);
-	printf("meals : %d\n", data->meals);
+	// printf("all philos : %d\n", data->num_philos);
+	// printf("time to die : %d\n", data->time_todie);
+	// printf("time to eat : %d\n", data->time_toeat);
+	// printf("time_tosleep : %d\n", data->time_tosleep);
+	// printf("meals : %d\n", data->meals);
 
-	printf("---------------------------------------------\n");
+	// printf("---------------------------------------------\n");
 
-	t_philo *tmp = data->philo;
+	// t_philo *tmp = data->philo;
 
-	while (tmp)
-	{
-		printf("id : %d\n", (tmp)->id);
-		tmp = tmp->next;
-	}
+	// while (tmp)
+	// {
+	// 	printf("id : %d\n", (tmp)->id);
+	// 	tmp = tmp->next;
+	// }
 
-	printf("---------------------------------------------\n");
+	// printf("---------------------------------------------\n");
 
-	t_fork *tmp2 = data->fork;
+	// t_fork *tmp2 = data->fork;
 
-	while (tmp2)
-	{
-		printf("id : %d\n", (tmp2)->philo);
-		tmp2 = tmp2->next;
-	}
+	// while (tmp2)
+	// {
+	// 	printf("id : %d\n", (tmp2)->philo);
+	// 	tmp2 = tmp2->next;
+	// }
 }

@@ -26,7 +26,7 @@ void	add_front(t_philo **alst, t_philo *new)
 	*alst = n;
 }
 
-t_philo	*new_philo(int content)
+t_philo	*new_philo(int content, t_data *data)
 {
 	t_philo	*new;
 
@@ -36,6 +36,8 @@ t_philo	*new_philo(int content)
 	new->id = content;
 	new->status = 0;
 	new->eatenmeals = 0;
+	new->data = data;
+
 	// new->die = get_time_mls();
 	new->next = NULL;
 	return (new);

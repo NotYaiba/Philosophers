@@ -18,36 +18,36 @@ int	logError(char *err, int ret)
 	return (ret);
 }
 
-t_philo *get_philo(int philo_id, t_data *data)
-{
-	t_philo *philos;
+// t_philo *get_philo(int philo_id, t_data *data)
+// {
+// 	t_philo *philos;
 
-	philos = data->philo;
-	while(philos)
-	{
-		if (philos->id == philo_id)
-			return (philos);
-		philos = philos->next;
-	}
-	return (NULL);
-}
+// 	philos = data->philo;
+// 	while(philos)
+// 	{
+// 		if (philos->id == philo_id)
+// 			return (philos);
+// 		philos = philos->next;
+// 	}
+// 	return (NULL);
+// }
 
 void	*routine(void *tmp)
 {	
-	t_data *data;
+
 	t_philo *philo;
 
-	data = (t_data*)tmp;
-	philo = get_philo(data->philo_id, data);
+	philo = (t_philo*)tmp;
 	
-	pthread_mutex_lock(&data->lock);
+	pthread_mutex_lock(&philo->data->lock);
 	printf("---dkheeel salam %d----\n", philo->id);	
-	pthread_mutex_unlock(&data->lock);
+	pthread_mutex_unlock(&philo->data->lock);
  
 	while(1)
 	{
 			
 	}
+	return(NULL);
 }
 
 t_fork	*get_fork(t_data *data , int philo_id)
@@ -63,39 +63,37 @@ t_fork	*get_fork(t_data *data , int philo_id)
 	return (NULL);
 }
 
-void start_sum(t_data *data)
+void start_sum(t_philo *philos)
 {
 	t_philo *philo;
 	t_fork 	*fork;
-	philo = data->philo;
+	philo = philos;
 	while (philo)
 	{
-		if (philo->id % 2 == 1 &&  philo->id != data->num_philos)
+		printf("id : %d\n", philo->id);
+		if (philo->id % 2 == 1 &&  philo->id != philo->data->num_philos)
 		{
-			fork = get_fork(data ,philo->id);
+			fork = get_fork(philo->data ,philo->id);
 			fork->new_philo = philo->id;
-			fork = get_fork(data ,philo->id + 1);
+			fork = get_fork(philo->data ,philo->id + 1);
 			fork->new_philo = philo->id;
 			philo->status = 1;
-			print("has takken fork\n", philo, get_time(), 1, data);
-			print("has takken fork\n", philo, get_time(), 1, data);
-			// usleep(900);
+			print("has takken fork\n", philo, get_time(), 1, philo->data);
+			print("has takken fork\n", philo, get_time(), 1, philo->data);
+			usleep(900);
 		}
 		else
 		{
 			philo->status = 0;
 		}
-		
 		philo = philo->next;
 	}
-	philo = data->philo;
+	philo = philos;
 	while (philo)
 	{
 		
-		data->philo_id = philo->id;
-		// data->philo_id = 1;
-		pthread_create(&(philo->trd_id), NULL, &routine, data);
-		usleep(20200);
+		pthread_create(&(philo->trd_id), NULL, &routine, philo);
+		// usleep(20200);
 		philo = philo->next;
 	}
 
@@ -104,32 +102,41 @@ void start_sum(t_data *data)
 int main(int ac, char **av)
 {
     t_data *data;
+    t_philo *philo;
+
+	philo = NULL;
 	data = malloc(sizeof(t_data));
-	data->philo = NULL;
-	
 	if (ac < 5 || ac > 6 || check_args(av) == 0)
-		return (logError("Error.\n", 0));
-	data = malloc(sizeof(t_data));
+		return (logError("Error.\n", 0)); 
 	init_data(data, av, ac);
 	int i;
 
 	i = 1;
+	data->fork = NULL;
 	while (i <= data->num_philos)
 	{
 		///init philos and forks
-		addback(&data->philo, new_philo(i));
 		addbackf(&data->fork, new_fork(i));
 		if (pthread_mutex_init(&data->fork->flock, NULL) != 0)
 			print("\n mutex init failed\n", NULL, 0, 2, data);
-		////
+		// ////
 		if (pthread_mutex_init(&data->lock, NULL) != 0)
 			print("\n mutex init failed\n", NULL, 0, 2, data);
-		// pthread_create(&(tid[i]), NULL, &routine, NULL);
+
 		i++;
 	}
-	start_sum(data);
+	i = 1;
+	while (i <= data->num_philos)
+	{
+		addback(&philo, new_philo(i, data));
+		i++;
+	}
+
+	start_sum(philo);
 	// log_data(data);
-	while (1);
+	while (1){
+
+	}
     return (0);
 }
 

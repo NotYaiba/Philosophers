@@ -20,21 +20,14 @@
 #include <sys/time.h>
 
 
-typedef struct s_philo
-{
-    int id;
-	int status;
-	int eatenmeals;
-	int	die;
-	pthread_t 		trd_id;
-	struct s_philo *next;
-}				t_philo;
+
 typedef struct s_fork
 {
 	int				philo;
 	int				new_philo;
 	pthread_mutex_t flock;
 	struct s_fork	*next;
+
 
 }				t_fork;
 typedef struct s_data
@@ -46,10 +39,19 @@ typedef struct s_data
     int meals;
 	int philo_id;
     pthread_mutex_t lock;
-	t_philo			*philo;
 	t_fork			*fork;
 
 }				t_data;
+typedef struct s_philo
+{
+    int id;
+	int status;
+	int eatenmeals;
+	int	die;
+	pthread_t 		trd_id;
+	t_data			*data;
+	struct s_philo *next;
+}				t_philo;
 
 void ft_putstr(char *str, int fd);
 void log_data(t_data *data);
@@ -59,7 +61,7 @@ void init_data(t_data *data, char **av, int ac);
 int	check_args(char **av);
 // linked list functions
 
-t_philo	*new_philo(int content);
+t_philo	*new_philo(int content, t_data *data);
 t_fork	*new_fork(int content);
 
 void	add_front(t_philo **alst, t_philo *new);
