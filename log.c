@@ -18,7 +18,8 @@ void print(char *msg, t_philo *philo , int time, int a, t_data *data)
 		write(1 , msg, strlen(msg)); //todo
 
 	}
-	pthread_mutex_unlock(&data->lock);
+	if	(msg[0] != 'd')
+		pthread_mutex_unlock(&data->lock);
 }
 void	ft_putchar_fd(char c, int i)
 {

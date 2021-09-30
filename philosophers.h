@@ -6,7 +6,7 @@
 /*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:28:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/09/27 22:44:13 by yaiba            ###   ########.fr       */
+/*   Updated: 2021/09/30 03:28:56 by yaiba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_philo
 }				t_philo;
 
 void ft_putstr(char *str, int fd);
-void log_data(t_data *data);
+void log_data(t_philo *philo);
 int		ft_isdigit(int cc);
 int ft_atoi(const char *s);
 void init_data(t_data *data, char **av, int ac);
@@ -75,5 +75,9 @@ void			ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int i);
 // utils
 int	get_time(void);
+void	sleep_thread(int time);
+t_fork	*get_fork(t_data *data , int philo_id);
+int	ready_to_eat(t_philo *philo);
+void	forks_down(t_philo * philo);
 
 #endif

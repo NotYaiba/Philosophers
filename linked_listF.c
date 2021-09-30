@@ -38,7 +38,7 @@ t_philo	*new_philo(int content, t_data *data)
 	new->eatenmeals = 0;
 	new->data = data;
 
-	// new->die = get_time_mls();
+	new->die = get_time();
 	new->next = NULL;
 	return (new);
 }

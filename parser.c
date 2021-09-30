@@ -34,7 +34,7 @@ int	check_args(char **av)
 	return (1);
 }
 
-void log_data(t_data *data)
+void log_data(t_philo *philo)
 {
 	// printf("all philos : %d\n", data->num_philos);
 	// printf("time to die : %d\n", data->time_todie);
@@ -43,14 +43,18 @@ void log_data(t_data *data)
 	// printf("meals : %d\n", data->meals);
 
 	// printf("---------------------------------------------\n");
+	int i = 0;
+	t_philo *tmp = philo;
 
-	// t_philo *tmp = data->philo;
+	while (tmp)
+	{
+		printf("id : %d\n", (tmp)->id);
+		tmp = tmp->next;
 
-	// while (tmp)
-	// {
-	// 	printf("id : %d\n", (tmp)->id);
-	// 	tmp = tmp->next;
-	// }
+		if (i == philo->data->num_philos - 1)
+			break;
+		i++;
+	}
 
 	// printf("---------------------------------------------\n");
 
