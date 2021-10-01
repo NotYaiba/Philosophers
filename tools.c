@@ -1,6 +1,5 @@
 #include "philosophers.h"
 
-
 int	get_time(void)
 {
 	struct timeval	time;
@@ -13,7 +12,7 @@ int	get_time(void)
 
 void	sleep_thread(int time)
 {
-	int t;
+	int	t;
 
 	t = get_time();
 	while (get_time() - t < time)
@@ -22,58 +21,62 @@ void	sleep_thread(int time)
 
 int	ready_to_eat(t_philo *philo)
 {
-	t_fork *forkp;
-	t_fork *forks;
+	t_fork	*forkp;
+	t_fork	*forks;
 
-
-	forkp = get_fork(philo->data , philo->id);
+	forkp = get_fork(philo->data, philo->id);
 	forks = forkp->next;
-	printf("fork id is %d\n", forkp->philo);
-	printf("next fork id is %d\n", forks->philo);
 	pthread_mutex_lock(&forkp->flock);
 	if (forkp->new_philo == 0)
 	{
-		print("has takken a fork\n", philo , get_time(), 1, philo->data);
+		print("has takken a fork\n", philo, get_time(), 1);
 		forkp->new_philo = philo->id;
+		philo->fork = forkp->philo;
 	}
-	else
-	{
-			return (0);
-	}
-	
-
-
 	pthread_mutex_unlock(&forkp->flock);
 	pthread_mutex_lock(&forks->flock);
 	if (forks->new_philo == 0)
 	{
-		print("has takken a fork\n", philo , get_time(), 1, philo->data);
-		forks->new_philo = philo->id;
+		print("has takken a fork\n", philo, get_time(), 1);
+		forks->new_philo = philo->next->id;
+		philo->fork1 = forks->philo;
 	}
-	else
-	{
-		return (0);
-	}
-	
 	pthread_mutex_unlock(&forks->flock);
-	return(1);
+	return (philo->fork && philo->fork1);
 }
 
-void	forks_down(t_philo * philo)
+void	forks_down(t_philo *philo)
 {
 	t_fork	*forkp;
 	t_fork	*forks;
 
-	forkp = get_fork(philo->data , philo->id);
+	forkp = get_fork(philo->data, philo->id);
 	forks = forkp->next;
 	if (forkp->new_philo == 0)
 		return ;
 	if (forks->new_philo != 0)
 	{
+		print("has free a fork\n", philo, get_time(), 1);
+		print("has free a fork\n", philo, get_time(), 1);
 		forkp->new_philo = 0;
 		forks->new_philo = 0;
+		philo->fork1 = 0;
+		philo->fork = 0;
 	}
-	philo->status = 2; //sleep
-	philo->eatenmeals++; //sleep
+	philo->status = 2;
+	philo->eatenmeals++;
+}
 
+t_fork	*get_fork(t_data *data, int philo_id)
+{
+	t_fork	*fork;
+
+	fork = data->fork;
+	while (fork)
+	{
+		if (fork->philo == philo_id)
+			return (fork);
+		fork = fork->next;
+	}
+	return (NULL);
 }

@@ -1,15 +1,15 @@
 #include "philosophers.h"
 
-int		ft_isdigit(int cc)
+int	ft_isdigit(int cc)
 {
 	if (cc >= 48 && cc <= 57)
 		return (1);
 	return (0);
 }
 
-void ft_putstr(char *str, int fd)
+void	ft_putstr(char *str, int fd)
 {
-    int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -19,7 +19,7 @@ void ft_putstr(char *str, int fd)
 	}
 }
 
-int ft_atoi(const char *s)
+int	ft_atoi(const char *s)
 {
 	char	*str;
 	int		x;
@@ -28,7 +28,7 @@ int ft_atoi(const char *s)
 	str = (char *)s;
 	x = 0;
 	n = 1;
-	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' ||
+	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' || \
 		*str == '\v' || *str == '\f' || *str == '\r'))
 		++str;
 	if (*str == '-')
@@ -47,3 +47,12 @@ int ft_atoi(const char *s)
 	return (x * n);
 }
 
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
