@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
+/*   Updated: 2021/10/03 16:54:56 by melkarmi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 int	get_time(void)
@@ -37,7 +49,7 @@ int	ready_to_eat(t_philo *philo)
 	pthread_mutex_lock(&forks->flock);
 	if (forks->new_philo == 0)
 	{
-		print("has takken a fork\n", philo, get_time(), 1);
+		print("has takken d a fork\n", philo, get_time(), 1);
 		forks->new_philo = philo->next->id;
 		philo->fork1 = forks->philo;
 	}

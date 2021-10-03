@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
+/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/01 01:34:22 by yaiba            ###   ########.fr       */
+/*   Updated: 2021/10/03 17:04:42 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	check_isalive(t_philo *philo)
 		print("died\n", philo, get_time(), 1);
 		exit(0);
 	}
+	if (philo->eatenmeals == philo->data->meals)
+		exit(0);
 }
 
 void	update(t_philo *philo)
@@ -71,24 +73,24 @@ void	start_sum(t_philo *philos)
 
 	i = 1;
 	philo = philos;
-	while (i <= philos->data->num_philos - 1)
+	while (i <= philos->data->num_philos)
 	{
 		if (philo->id % 2 == 1 && philo->id != philo->data->num_philos)
 		{
 			fork = get_fork(philo->data, philo->id);
 			fork->new_philo = philo->id;
 			fork = fork->next;
-			fork->new_philo = fork->next->philo;
+			fork->new_philo = philo->next->id;
 			philo->status = 1;
-			print("has takken fork\n", philo, get_time(), 1);
-			print("has takken fork\n", philo, get_time(), 1);
+			print("has takken1 fork\n", philo, get_time(), 1);
+			print("has takken1 fork\n", philo, get_time(), 1);
 		}
 		else
 			philo->status = 0;
-		pthread_create(&(philo->trd_id), NULL, &routine, philo);
 		i++;
 		philo = philo->next;
 	}
+	start_threads(philos);
 }
 
 int	main(int ac, char **av)
@@ -109,7 +111,7 @@ int	main(int ac, char **av)
 		headf = headf->next;
 	headf->next = data->fork;
 	philo = create_philos(philo, data);
-	start_sum(philo);
+	// start_sum(philo);
 	while (1)
 	{
 	}

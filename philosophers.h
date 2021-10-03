@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
+/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:28:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/01 01:46:24 by yaiba            ###   ########.fr       */
+/*   Updated: 2021/10/03 17:00:12 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ t_fork	*get_fork(t_data *data, int philo_id);
 int		ready_to_eat(t_philo *philo);
 void	forks_down(t_philo *philo);
 t_fork	*get_fork(t_data *data, int philo_id);
+void	start_threads(t_philo *philos);
+void	*routine(void *tmp);
 
 #endif

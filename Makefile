@@ -10,13 +10,13 @@ OBJS = ${SRCS:.c=.o}
 
 NAME = philo
 
-FLAGS = -Wall -Wextra -Werror  -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror  -g 
 
 
 all : $(NAME)
 
 $(NAME) : ${OBJS}
-		@gcc  ${OBJS} -g -o$(NAME) -pthread  -fsanitize=address
+		@gcc  ${OBJS} -g -o$(NAME) -pthread  
 		@rm -f ${OBJS} 
 
 

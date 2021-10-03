@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/03 16:54:37 by melkarmi          #+#    #+#             */
+/*   Updated: 2021/10/03 17:04:02 by melkarmi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	init_data(t_data *data, char **av, int ac)
@@ -67,18 +79,18 @@ t_philo	*create_philos(t_philo *philo, t_data *data)
 	head->next = philo;
 	return (philo);
 }
-// void log_data(t_philo *philo)
-// {
-// 	int i = 0;
-// 	t_fork *tmp = philo->data->fork;
 
-// 	while (tmp)
-// 	{
-// 		printf("id : %d\n", (tmp)->philo);
-// 		tmp = tmp->next;
+void	start_threads(t_philo *philos)
+{
+	int		i;
+	t_philo	*philo;
 
-// 		if (i == philo->data->num_philos - 1)
-// 			break ;
-// 		i++;
-// 	}
-// }
+	philo = philos;
+	i = 1;
+	while (i <= philos->data->num_philos)
+	{
+		pthread_create(&(philo->trd_id), NULL, &routine, philo);
+		i++;
+		philo = philo->next;
+	}
+}
