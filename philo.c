@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:04:42 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/03 17:29:45 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	*routine(void *tmp)
 			print("is eating\n", philo, get_time(), 1);
 			philo->die = get_time();
 			sleep_thread(data->time_toeat);
-			print("is done eating\n", philo, get_time(), 1);
 		}
 		else if (philo->status == 2)
 		{
@@ -82,8 +81,8 @@ void	start_sum(t_philo *philos)
 			fork = fork->next;
 			fork->new_philo = philo->next->id;
 			philo->status = 1;
-			print("has takken1 fork\n", philo, get_time(), 1);
-			print("has takken1 fork\n", philo, get_time(), 1);
+			print("has takken fork\n", philo, get_time(), 1);
+			print("has takken fork\n", philo, get_time(), 1);
 		}
 		else
 			philo->status = 0;
@@ -111,7 +110,7 @@ int	main(int ac, char **av)
 		headf = headf->next;
 	headf->next = data->fork;
 	philo = create_philos(philo, data);
-	// start_sum(philo);
+	start_sum(philo);
 	while (1)
 	{
 	}

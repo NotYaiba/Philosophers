@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:37 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:04:02 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/03 17:23:49 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_data(t_data *data, char **av, int ac)
 	data->time_todie = ft_atoi(av[2]);
 	data->time_toeat = ft_atoi(av[3]);
 	data->time_tosleep = ft_atoi(av[4]);
-	data->meals = 0;
+	data->meals = -1;
 	data->philo_id = 0;
 	if (ac == 6)
 		data->meals = ft_atoi(av[5]);

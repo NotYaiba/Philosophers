@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 16:54:56 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/03 17:19:08 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	forks_down(t_philo *philo)
 		return ;
 	if (forks->new_philo != 0)
 	{
-		print("has free a fork\n", philo, get_time(), 1);
-		print("has free a fork\n", philo, get_time(), 1);
 		forkp->new_philo = 0;
 		forks->new_philo = 0;
 		philo->fork1 = 0;
