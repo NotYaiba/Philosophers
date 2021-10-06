@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:19:08 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/03 17:48:34 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ready_to_eat(t_philo *philo)
 	pthread_mutex_lock(&forks->flock);
 	if (forks->new_philo == 0)
 	{
-		print("has takken d a fork\n", philo, get_time(), 1);
+		print("has takken a fork\n", philo, get_time(), 1);
 		forks->new_philo = philo->next->id;
 		philo->fork1 = forks->philo;
 	}

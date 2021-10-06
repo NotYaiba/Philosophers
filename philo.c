@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:29:45 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/06 21:55:30 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	check_isalive(t_philo *philo)
 		print("died\n", philo, get_time(), 1);
 		exit(0);
 	}
+
 	if (philo->eatenmeals == philo->data->meals)
 		exit(0);
 }
