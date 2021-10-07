@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:28:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:00:12 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:26:52 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_fork
 	int				new_philo;
 	pthread_mutex_t	flock;
 	struct s_fork	*next;
-
 }				t_fork;
 
 typedef struct s_data
@@ -38,7 +37,6 @@ typedef struct s_data
 	int				philo_id;
 	pthread_mutex_t	lock;
 	t_fork			*fork;
-
 }				t_data;
 
 typedef struct s_philo

@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:48:34 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:17:24 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ void	forks_down(t_philo *philo)
 		forks->new_philo = 0;
 		philo->fork1 = 0;
 		philo->fork = 0;
+		philo->status = 2;
+		philo->eatenmeals++;
 	}
-	philo->status = 2;
-	philo->eatenmeals++;
+
 }
 
 t_fork	*get_fork(t_data *data, int philo_id)

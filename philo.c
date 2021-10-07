@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/06 21:55:30 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:21:05 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	check_isalive(t_philo *philo)
 {
+	t_philo	*tmp;
+	int f;
+
+	tmp = philo;
+	f = 1;
 	if (get_time() - philo->die >= philo->data->time_todie)
 	{
 		print("died\n", philo, get_time(), 1);
 		exit(0);
 	}
-
-	if (philo->eatenmeals == philo->data->meals)
-		exit(0);
 }
 
 void	update(t_philo *philo)
