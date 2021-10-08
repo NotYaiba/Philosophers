@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/07 18:21:05 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/08 19:05:18 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,34 @@ void	check_isalive(t_philo *philo)
 {
 	t_philo	*tmp;
 	int f;
+	int i;
 
 	tmp = philo;
-	f = 1;
+	f = 0;
+	i = 0;
 	if (get_time() - philo->die >= philo->data->time_todie)
 	{
 		print("died\n", philo, get_time(), 1);
 		exit(0);
 	}
+	if (philo->data->meals != -1)
+	{
+		pthread_mutex_lock(&philo->data->lock);
+		
+		while (i <= philo->data->num_philos)
+		{
+			if (tmp->eatenmeals == philo->data->meals)
+				f++;
+			i++;
+			tmp = tmp->next;
+		}
+		if (f == philo->data->num_philos)
+		{
+			exit(0);
+		}
+		pthread_mutex_unlock(&philo->data->lock);
+	}
+
 }
 
 void	update(t_philo *philo)
