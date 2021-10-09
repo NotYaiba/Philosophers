@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/08 19:05:18 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/09 23:02:45 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	check_isalive(t_philo *philo)
 {
-	t_philo	*tmp;
+	t_philo	*phi;
 	int f;
 	int i;
 
-	tmp = philo;
+	phi = philo;
 	f = 0;
 	i = 0;
 	if (get_time() - philo->die >= philo->data->time_todie)
@@ -26,24 +26,22 @@ void	check_isalive(t_philo *philo)
 		print("died\n", philo, get_time(), 1);
 		exit(0);
 	}
-	if (philo->data->meals != -1)
+	if (philo->data->meals !=-1)
 	{
 		pthread_mutex_lock(&philo->data->lock);
-		
-		while (i <= philo->data->num_philos)
+		while (phi)
 		{
-			if (tmp->eatenmeals == philo->data->meals)
-				f++;
-			i++;
-			tmp = tmp->next;
+			if (phi->eatenmeals < philo->data->meals)
+			{
+				pthread_mutex_unlock(&philo->data->lock);
+				return ;
+			}
+			if (phi->id == philo->data->num_philos)
+				break ;
+			phi = phi->next;
 		}
-		if (f == philo->data->num_philos)
-		{
-			exit(0);
-		}
-		pthread_mutex_unlock(&philo->data->lock);
+		exit(100);
 	}
-
 }
 
 void	update(t_philo *philo)

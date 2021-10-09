@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:37 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 17:23:49 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/09 23:02:36 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	start_threads(t_philo *philos)
 	i = 1;
 	while (i <= philos->data->num_philos)
 	{
+		usleep(10);
 		pthread_create(&(philo->trd_id), NULL, &routine, philo);
 		i++;
 		philo = philo->next;

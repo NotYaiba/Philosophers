@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/07 18:17:24 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/09 23:02:07 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ready_to_eat(t_philo *philo)
 	if (forks->new_philo == 0)
 	{
 		print("has takken a fork\n", philo, get_time(), 1);
-		forks->new_philo = philo->next->id;
+		forks->new_philo = philo->id;
 		philo->fork1 = forks->philo;
 	}
 	pthread_mutex_unlock(&forks->flock);
@@ -75,6 +75,7 @@ void	forks_down(t_philo *philo)
 		philo->status = 2;
 		philo->eatenmeals++;
 	}
+
 
 }
 
