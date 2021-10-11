@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:29:02 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/09 23:02:45 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/10/11 15:54:37 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 void	check_isalive(t_philo *philo)
 {
 	t_philo	*phi;
-	int f;
-	int i;
 
 	phi = philo;
-	f = 0;
-	i = 0;
 	if (get_time() - philo->die >= philo->data->time_todie)
 	{
 		print("died\n", philo, get_time(), 1);
-		exit(0);
+		pthread_mutex_unlock(&philo->data->alive);
+		philo->data->run = 0;
 	}
-	if (philo->data->meals !=-1)
+	if (philo->data->meals != -1)
 	{
 		pthread_mutex_lock(&philo->data->lock);
 		while (phi)
@@ -40,7 +37,8 @@ void	check_isalive(t_philo *philo)
 				break ;
 			phi = phi->next;
 		}
-		exit(100);
+		pthread_mutex_unlock(&philo->data->alive);
+		philo->data->run = 0;
 	}
 }
 
@@ -65,7 +63,7 @@ void	*routine(void *tmp)
 
 	philo = (t_philo *)tmp;
 	data = philo->data;
-	while (1)
+	while (data->run)
 	{
 		if (philo->status == 1)
 		{
@@ -132,8 +130,6 @@ int	main(int ac, char **av)
 	headf->next = data->fork;
 	philo = create_philos(philo, data);
 	start_sum(philo);
-	while (1)
-	{
-	}
+	pthread_mutex_lock(&data->alive);
 	return (0);
 }

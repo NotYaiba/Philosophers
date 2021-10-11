@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/09 23:02:07 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/10/11 15:35:03 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	forks_down(t_philo *philo)
 		philo->status = 2;
 		philo->eatenmeals++;
 	}
-
-
 }
 
 t_fork	*get_fork(t_data *data, int philo_id)

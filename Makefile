@@ -12,12 +12,10 @@ NAME = philo
 
 FLAGS = -Wall -Wextra -Werror  -g 
 
-
 all : $(NAME)
 
 $(NAME) : ${OBJS}
-		@gcc  ${OBJS} -g -o$(NAME) -pthread  
-		@rm -f ${OBJS} 
+		@gcc ${FLAGS} ${OBJS} -g -o$(NAME)  -pthread  
 
 
 clean :
