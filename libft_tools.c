@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:55:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/03 16:55:14 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:21:42 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,11 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	log_died(t_philo *philo, t_data	*data)
+{
+	print("died\n", philo, get_time(), 1);
+	pthread_mutex_unlock(&data->alive);
+	data->run = 0;
 }

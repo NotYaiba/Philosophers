@@ -12,19 +12,19 @@
 
 #include "philosophers.h"
 
-int	get_time(void)
+long	get_time(void)
 {
 	struct timeval	time;
-	unsigned int	i;
+	long			i;
 
 	gettimeofday(&time, NULL);
-	i = (unsigned int)time.tv_sec;
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	i = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (i);
 }
 
 void	sleep_thread(int time)
 {
-	int	t;
+	long	t;
 
 	t = get_time();
 	while (get_time() - t < time)

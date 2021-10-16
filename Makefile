@@ -15,7 +15,7 @@ FLAGS = -Wall -Wextra -Werror  -g
 all : $(NAME)
 
 $(NAME) : ${OBJS}
-		@gcc ${FLAGS} ${OBJS} -g -o$(NAME)  -pthread  
+		@gcc ${FLAGS} ${OBJS} -g -o$(NAME)  -pthread  -fsanitize=address
 
 
 clean :

@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 15:28:13 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/11 15:46:11 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:18:09 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	pthread_mutex_t	alive;
 	t_fork			*fork;
 	int				run;
+	long			start_time;
 }				t_data;
 
 typedef struct s_philo
@@ -46,7 +47,7 @@ typedef struct s_philo
 	int				id;
 	int				status;
 	int				eatenmeals;
-	int				die;
+	long			die;
 	int				fork;
 	int				fork1;
 	pthread_t		trd_id;
@@ -67,11 +68,11 @@ t_philo	*new_philo(int content, t_data *data);
 t_fork	*new_fork(int content);
 void	addback(t_philo **alst, t_philo *new);
 void	addbackf(t_fork **alst, t_fork *new);
-void	print(char *msg, t_philo *philo, int time, int a);
-void	ft_putnbr_fd(int n, int fd);
+void	print(char *msg, t_philo *philo, long time, int a);
+void	ft_putnbr_fd(long n, int fd);
 void	ft_putchar_fd(char c, int i);
 int		log_error(char *err, int ret);
-int		get_time(void);
+long	get_time(void);
 void	sleep_thread(int time);
 t_fork	*get_fork(t_data *data, int philo_id);
 int		ready_to_eat(t_philo *philo);
@@ -79,5 +80,7 @@ void	forks_down(t_philo *philo);
 t_fork	*get_fork(t_data *data, int philo_id);
 void	start_threads(t_philo *philos);
 void	*routine(void *tmp);
+void	free_all(t_philo **philo);
+void	log_died(t_philo *philo, t_data	*data);
 
 #endif

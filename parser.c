@@ -6,7 +6,7 @@
 /*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:37 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/11 15:49:27 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/11 16:04:25 by melkarmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void	init_data(t_data *data, char **av, int ac)
 	data->meals = -1;
 	data->philo_id = 0;
 	data->run = 1;
+	data->start_time = get_time();
 	if (ac == 6)
 		data->meals = ft_atoi(av[5]);
+	if (data->meals == 0)
+		data->meals = -1;
 }
 
 int	check_args(char **av)
@@ -43,6 +46,8 @@ int	check_args(char **av)
 		}
 		i++;
 	}
+	if (ft_atoi(av[1]) == 0)
+		return (0);
 	return (1);
 }
 
