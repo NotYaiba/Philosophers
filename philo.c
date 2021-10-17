@@ -19,6 +19,8 @@ int	check_isalive(t_philo *philo)
 	phi = philo;
 	if (get_time() - philo->die >= (long)philo->data->time_todie)
 	{
+		if (philo->status == 1)
+			return (0);
 		log_died(philo, philo->data);
 		return (1);
 
