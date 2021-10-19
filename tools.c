@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melkarmi <melkarmi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaiba <yaiba@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 16:54:54 by melkarmi          #+#    #+#             */
-/*   Updated: 2021/10/11 15:35:03 by melkarmi         ###   ########.fr       */
+/*   Updated: 2021/10/19 02:21:57 by yaiba            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,17 @@ long	get_time(void)
 	return (i);
 }
 
-void	sleep_thread(int time)
+void	sleep_thread(int time, t_philo *philo)
 {
 	long	t;
 
 	t = get_time();
 	while (get_time() - t < time)
-		usleep(50);
+	{
+		usleep(10);
+		if (philo->status == 2)
+			check_isalive(philo);
+	}
 }
 
 int	ready_to_eat(t_philo *philo)
@@ -72,6 +76,8 @@ void	forks_down(t_philo *philo)
 		forks->new_philo = 0;
 		philo->fork1 = 0;
 		philo->fork = 0;
+		print("has free a fork\n", philo, get_time(), 1);
+
 		philo->status = 2;
 		philo->eatenmeals++;
 	}

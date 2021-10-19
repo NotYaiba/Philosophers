@@ -4,6 +4,7 @@ SRCS = philo.c \
 		linked_listF.c \
 		log.c \
 		tools.c \
+		smg.c\
 
 OBJS = ${SRCS:.c=.o}
 
